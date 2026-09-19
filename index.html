@@ -1,39 +1,500 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Biblioteca JavaScript</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Biblioteca educativa para aprender APIs con JavaScript desde cero: HTTP, JSON, fetch, async/await, CRUD, errores, CORS y proyectos.">
+<title>API JS Academy · APIs con JavaScript</title>
 <style>
-:root{--bg:#030b18;--panel:#08182a;--panel2:#0c2138;--line:#00e7d9;--green:#35f59f;--yellow:#ffd84d;--blue:#48baff;--text:#f3f8ff;--muted:#9ab9d1;--code:#06101d;--shadow:0 20px 55px rgba(0,0,0,.35)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 85% 0,#07344e 0,transparent 26%),linear-gradient(135deg,#020712,#071729 55%,#020712);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}.top{position:sticky;top:0;z-index:20;background:rgba(3,11,24,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,231,217,.28);padding:18px 24px}.brand{display:flex;gap:14px;align-items:center}.logo{width:50px;height:50px;border-radius:14px;background:var(--yellow);color:#111;display:grid;place-items:center;font-weight:900;box-shadow:0 0 30px rgba(255,216,77,.18)}h1{margin:0;font-size:clamp(27px,3vw,44px)}.subtitle{color:var(--muted);margin-top:5px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.toolbar input,.toolbar select{background:#071629;border:1px solid #1c4664;color:white;border-radius:11px;padding:11px 13px;outline:none}.toolbar input{flex:1;min-width:250px}.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px;padding:18px;max-width:1700px;margin:auto}.side{position:sticky;top:145px;height:calc(100vh - 165px);overflow:auto;background:rgba(8,24,42,.84);border:1px solid #1a4662;border-radius:20px;padding:18px;box-shadow:var(--shadow)}.side h3{color:#84b6d9;font-size:12px;letter-spacing:.18em}.nav button{width:100%;text-align:left;background:transparent;color:#bdd9ea;border:0;border-radius:10px;padding:11px 12px;margin:2px 0;cursor:pointer}.nav button:hover{background:linear-gradient(90deg,rgba(255,216,77,.15),rgba(53,245,159,.08));color:#ffe779;box-shadow:inset 3px 0 var(--yellow)}.main{min-width:0}.hero{background:linear-gradient(135deg,rgba(10,30,50,.96),rgba(6,18,33,.96));border:1px solid rgba(0,231,217,.35);border-radius:22px;padding:24px;box-shadow:var(--shadow);margin-bottom:18px}.hero .badge{display:inline-block;border:1px solid #7a6e1a;color:#ffe779;border-radius:999px;padding:5px 9px;font-size:12px}.hero h2{font-size:31px;margin:10px 0 8px}.hero p{color:#b8d2e5;line-height:1.7;max-width:950px}.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.pill{border:1px solid #254a67;background:#0b2037;color:#a9cae0;border-radius:999px;padding:6px 10px;font-size:12px}.section-title{font-size:25px;margin:24px 0 10px}.cards{display:grid;gap:14px}.card{display:grid;grid-template-columns:minmax(245px,.9fr) minmax(320px,1.15fr) minmax(280px,1fr);background:linear-gradient(135deg,rgba(8,28,43,.95),rgba(8,18,34,.95));border:1px solid #155b67;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}.explain,.code,.preview{padding:20px}.explain{border-left:6px solid var(--yellow)}.tag{font-size:23px;font-weight:900;color:#ffe16c}.explain h3{margin:7px 0 10px}.explain p{color:#b6d2e6;line-height:1.65}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{font-size:11px;padding:5px 8px;border:1px solid #245e7d;border-radius:999px;color:#75dbff}.note{margin-top:12px;border:1px solid #185978;border-radius:10px;padding:10px 12px;color:#a5d7f1;background:rgba(5,39,62,.45);font-size:13px}.code{background:#061425;border-left:1px solid #17354e;border-right:1px solid #17354e}.head{display:flex;justify-content:space-between;align-items:center;color:#9fd1f1;font-size:12px;margin-bottom:12px}.copy,.run{border:1px solid #24746f;background:#082b33;color:#6effdb;border-radius:8px;padding:6px 9px;cursor:pointer}pre{white-space:pre-wrap;word-break:break-word;margin:0;color:#edf6ff;font:13px/1.55 Consolas,monospace}.preview{background:#0a1d31}.frame{background:white;color:#111;border-radius:10px;min-height:150px;padding:16px;overflow:auto}.activity{margin:18px 0;background:linear-gradient(135deg,rgba(255,216,77,.08),rgba(53,245,159,.08));border:1px solid #4d5f48;border-radius:16px;padding:18px}.editor{display:grid;grid-template-columns:1fr 1fr;gap:12px}.editor textarea{width:100%;min-height:190px;background:#04101d;color:#dcf5ff;border:1px solid #24506c;border-radius:12px;padding:14px;font:13px/1.5 Consolas,monospace}.editor iframe{width:100%;min-height:470px;background:white;border:1px solid #24506c;border-radius:12px}@media(max-width:1150px){.card{grid-template-columns:1fr 1fr}.preview{grid-column:1/-1}}@media(max-width:820px){.layout{grid-template-columns:1fr}.side{position:relative;top:0;height:auto}.card,.editor{grid-template-columns:1fr}.preview{grid-column:auto}.top{position:relative}.toolbar input{min-width:100%}}
+:root{
+  --bg:#04101d;--bg2:#071827;--panel:#0b2237;--panel2:#102c45;--line:#1f5878;
+  --accent:#36e4c3;--accent2:#ffd866;--blue:#6cc7ff;--danger:#ff7b8a;
+  --text:#f3f8fc;--muted:#afc8d9;--code:#03101b;--ok:#62eba8;
+  --shadow:0 18px 48px rgba(0,0,0,.3);--radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:
+radial-gradient(circle at 90% 0,rgba(54,228,195,.12),transparent 28%),
+linear-gradient(135deg,var(--bg),var(--bg2));color:var(--text);font-size:18px;line-height:1.65}
+button,input,select{font:inherit}
+a{color:var(--blue)}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(4,16,29,.94);backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(108,199,255,.25);padding:15px 22px}
+.toprow{display:flex;align-items:center;gap:14px;max-width:1700px;margin:auto}
+.logo{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent2),#ffb84d);
+color:#101820;font-weight:950;box-shadow:0 0 30px rgba(255,216,102,.2)}
+.titlebox{flex:1}.titlebox h1{margin:0;font-size:clamp(25px,3vw,42px);line-height:1.05}.titlebox p{margin:4px 0 0;color:var(--muted);font-size:.93rem}
+.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;max-width:1700px;margin:12px auto 0}
+.search,.filter{background:#061827;border:1px solid #23506d;color:#fff;border-radius:12px;padding:10px 13px}
+.search{flex:1;min-width:260px}
+.btn{border:1px solid #2d6e78;background:#0b3138;color:#8affea;border-radius:10px;padding:9px 13px;cursor:pointer;font-weight:700}
+.btn:hover{transform:translateY(-1px);border-color:var(--accent)}
+.btn.secondary{background:#10273a;color:#cce7f7;border-color:#31536a}
+.btn.warn{background:#382f12;color:#ffe99a;border-color:#6b5a1e}
+.progress-wrap{height:5px;background:#0c2437;margin-top:12px;border-radius:999px;overflow:hidden}
+.progress{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.25s}
+.layout{max-width:1700px;margin:auto;padding:18px;display:grid;grid-template-columns:310px minmax(0,1fr);gap:20px}
+.sidebar{position:sticky;top:145px;height:calc(100vh - 165px);overflow:auto;background:rgba(8,28,45,.88);
+border:1px solid #214a65;border-radius:var(--radius);padding:17px;box-shadow:var(--shadow)}
+.sidebar .eyebrow{font-size:.68rem;letter-spacing:.18em;color:#86abc1;margin:0 0 10px;font-weight:800}
+.navbtn{width:100%;text-align:left;border:0;background:transparent;color:#c2d7e5;padding:10px 11px;margin:2px 0;border-radius:11px;cursor:pointer}
+.navbtn:hover,.navbtn.active{background:linear-gradient(90deg,rgba(54,228,195,.16),rgba(108,199,255,.05));color:#fff;box-shadow:inset 3px 0 var(--accent)}
+.navbtn small{display:block;color:#7fa4bd;font-size:.7rem}
+.sidebar .map{margin-top:16px;border-top:1px solid #214a65;padding-top:15px;color:#9db9cb;font-size:.78rem}
+.main{min-width:0}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(15,49,73,.96),rgba(6,23,38,.96));
+border:1px solid #24647c;border-radius:26px;padding:clamp(22px,4vw,42px);box-shadow:var(--shadow);margin-bottom:20px}
+.hero:after{content:"API";position:absolute;right:-15px;bottom:-80px;font-size:210px;font-weight:950;color:rgba(54,228,195,.045);letter-spacing:-.08em}
+.badge{display:inline-flex;gap:7px;align-items:center;border:1px solid #5f5420;background:rgba(255,216,102,.08);
+color:#ffea98;border-radius:999px;padding:6px 11px;font-size:.72rem;font-weight:800}
+.hero h2{font-size:clamp(31px,5vw,60px);line-height:1.05;margin:14px 0 12px;max-width:950px}
+.hero p{max-width:930px;color:#c4dce9;margin:0}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{font-size:.72rem;border:1px solid #2a617e;color:#a6dfff;background:#0d2940;border-radius:999px;padding:6px 10px}
+.path{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:18px 0}
+.path div{background:#0a2236;border:1px solid #22516d;border-radius:14px;padding:14px}.path b{display:block;color:var(--accent2)}.path span{color:#a9c3d5;font-size:.8rem}
+.section{scroll-margin-top:160px;margin:22px 0}
+.section-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.num{min-width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:#0c3440;border:1px solid #26746f;color:#73ffe5;font-weight:900}
+.section-head h2{margin:0;font-size:1.55rem}.section-head p{margin:3px 0 0;color:var(--muted);font-size:.87rem}
+.lesson{background:linear-gradient(135deg,rgba(8,29,46,.97),rgba(7,22,36,.97));border:1px solid #1f536e;border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.lesson-grid{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(350px,1.12fr) minmax(280px,.95fr)}
+.panel{padding:20px}.explain{border-left:6px solid var(--accent2)}.code{background:var(--code);border-left:1px solid #1f455f;border-right:1px solid #1f455f}.preview{background:#0a2033}
+.kicker{font-size:.7rem;letter-spacing:.12em;color:#7ea9c2;font-weight:800}.explain h3{font-size:1.2rem;margin:4px 0 8px}.explain p{color:#bad1df;margin:0 0 12px}
+.key{border:1px solid #275b79;background:#0b273d;border-radius:12px;padding:11px 12px;margin-top:10px;color:#c8e0ee;font-size:.82rem}.key b{color:#fff}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.74rem;color:#91b4c9;margin-bottom:10px}
+pre{margin:0;white-space:pre-wrap;word-break:break-word;color:#e9f7ff;font:14px/1.65 Consolas,Monaco,monospace}
+.copy{border:1px solid #23675f;background:#092a2e;color:#75ffe4;border-radius:8px;padding:5px 8px;cursor:pointer}
+.output{background:#fff;color:#15202b;border-radius:13px;min-height:185px;padding:16px;overflow:auto;font-size:.84rem}
+.output h4{margin:0 0 8px}.json{font-family:Consolas,monospace;white-space:pre-wrap;background:#edf5f8;border-radius:9px;padding:10px;font-size:.77rem}
+.status{display:inline-block;border-radius:999px;background:#e8fff4;color:#096c47;padding:4px 8px;font-weight:800;font-size:.72rem}
+.tip{margin-top:12px;border:1px solid #225a6f;background:rgba(17,62,79,.42);border-radius:12px;padding:11px 12px;color:#aee3f4;font-size:.8rem}
+.activity{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.task,.mini{border-radius:17px;padding:17px}.task{background:linear-gradient(135deg,rgba(255,216,102,.09),rgba(255,216,102,.03));border:1px solid #655827}.mini{background:linear-gradient(135deg,rgba(54,228,195,.09),rgba(54,228,195,.03));border:1px solid #24675e}
+.task h4,.mini h4{margin:0 0 8px;font-size:1rem}.task p,.mini p{margin:0;color:#c3d7e3;font-size:.84rem}
+.check{margin-top:10px;display:flex;gap:8px;align-items:center;color:#b5cddb;font-size:.78rem}
+.check input{width:20px;height:20px;accent-color:var(--accent)}
+.table-wrap{overflow:auto}.http-table{width:100%;border-collapse:collapse;font-size:.82rem}.http-table th,.http-table td{border-bottom:1px solid #204459;padding:10px;text-align:left}.http-table th{color:#fff}.http-table td{color:#b9d2e1}
+.lab{background:linear-gradient(135deg,#0b2940,#071c2e);border:1px solid #24627e;border-radius:22px;padding:20px;margin:24px 0;box-shadow:var(--shadow)}
+.lab h2{margin:0 0 5px}.lab p{margin:0 0 15px;color:#b3cfdf}
+.api-form{display:grid;grid-template-columns:140px 1fr auto;gap:9px}.api-form select,.api-form input{background:#061725;color:#fff;border:1px solid #2a5772;border-radius:10px;padding:10px}
+.console{margin-top:12px;background:#020b12;color:#cfefff;border-radius:13px;padding:15px;min-height:140px;white-space:pre-wrap;font:14px/1.55 Consolas,monospace;overflow:auto}
+.final{border:1px solid #397262;background:linear-gradient(135deg,rgba(14,55,59,.9),rgba(7,25,38,.96));border-radius:24px;padding:24px;margin:25px 0}
+.final h2{margin-top:0}.final-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:16px}
+.project-steps{display:grid;gap:8px}.project-steps div{border:1px solid #2d655f;border-radius:12px;padding:11px;background:rgba(4,27,33,.48)}
+.app{background:#f4f8fb;color:#17232d;border-radius:15px;padding:16px;min-height:330px}.app-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.app input{flex:1;min-width:180px;border:1px solid #b9c9d4;border-radius:9px;padding:10px}.app button{border:0;background:#112b3e;color:white;border-radius:9px;padding:9px 12px;cursor:pointer}
+.user-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.user-card{border:1px solid #d2dee6;background:white;border-radius:12px;padding:11px}.user-card b{display:block}.user-card small{color:#607788}
+.footer{color:#7899ae;text-align:center;padding:25px 10px 45px;font-size:.75rem}
+.hidden{display:none!important}
+.light{--bg:#edf5f8;--bg2:#dcecf2;--panel:#fff;--panel2:#f4fafc;--text:#102332;--muted:#526d7e;--code:#0b1b26;--shadow:0 15px 38px rgba(41,77,97,.14)}
+.light .topbar{background:rgba(239,248,251,.94)}.light .sidebar,.light .lesson,.light .hero,.light .lab,.light .final{color:var(--text)}.light .titlebox p,.light .hero p,.light .explain p,.light .section-head p,.light .task p,.light .mini p,.light .lab p{color:#557081}.light .navbtn{color:#355265}.light .panel.preview{background:#eaf4f7}.light .explain{background:#fff}.light .section-head h2{color:#173142}
+@media(max-width:1200px){.lesson-grid{grid-template-columns:1fr 1fr}.preview{grid-column:1/-1}.path{grid-template-columns:1fr 1fr}}
+@media(max-width:850px){body{font-size:17px}.topbar{position:relative}.layout{grid-template-columns:1fr}.sidebar{position:relative;top:0;height:auto}.lesson-grid,.activity,.final-grid{grid-template-columns:1fr}.preview{grid-column:auto}.api-form{grid-template-columns:1fr}.path{grid-template-columns:1fr}.user-grid{grid-template-columns:1fr}.toolbar{align-items:stretch}.search{min-width:100%}}
 </style>
 </head>
 <body>
-<header class="top"><div class="brand"><div class="logo">JS</div><div><h1>Biblioteca JavaScript</h1><div class="subtitle">Conceptos, sintaxis, DOM, eventos, asincronía y práctica en vivo.</div></div></div><div class="toolbar"><input id="search" placeholder="Buscar variable, función, DOM, evento, promesa..."><select id="filter"><option value="all">Todos</option><option value="base">Fundamentos</option><option value="datos">Datos</option><option value="dom">DOM</option><option value="async">Asincronía</option><option value="avanzado">Avanzado</option></select></div></header>
-<div class="layout"><aside class="side"><h3>CONTENIDO</h3><div id="nav" class="nav"></div></aside><main class="main"><section class="hero"><span class="badge">JAVASCRIPT / ES202x</span><h2>De la sintaxis a la interacción real</h2><p>Aprende JavaScript por bloques: primero los fundamentos del lenguaje, luego estructuras de datos, DOM y eventos, asincronía, almacenamiento y conceptos modernos. Cada tarjeta incluye código y un resultado ejecutable o explicado.</p><div class="pills"><span class="pill">Variables</span><span class="pill">Funciones</span><span class="pill">Arrays</span><span class="pill">Objetos</span><span class="pill">DOM</span><span class="pill">Eventos</span><span class="pill">Fetch</span><span class="pill">Async/Await</span></div></section><div id="content"></div><section class="hero"><span class="badge">LABORATORIO</span><h2>Editor en vivo HTML + CSS + JavaScript</h2><p>Escribe los tres lenguajes y prueba interacciones directamente.</p><div class="editor"><div><textarea id="htmlEditor"><h2 id="title">Hola JavaScript</h2>\n<button id="btn">Cambiar mensaje</button></textarea><textarea id="cssEditor">body{font-family:Arial;padding:30px;background:#eef7ff}\nbutton{padding:10px 15px;border:0;border-radius:10px;background:#111827;color:white}</textarea><textarea id="jsEditor">document.querySelector('#btn').addEventListener('click',()=>{\n document.querySelector('#title').textContent='¡JavaScript está funcionando!';\n});</textarea></div><iframe id="live"></iframe></div></section></main></div>
+<header class="topbar">
+  <div class="toprow">
+    <div class="logo">API</div>
+    <div class="titlebox">
+      <h1>API JS Academy</h1>
+      <p>APIs con JavaScript desde cero · solo lo necesario para empezar bien</p>
+    </div>
+    <button class="btn secondary" id="themeBtn">☀ Tema</button>
+  </div>
+  <div class="toolbar">
+    <input class="search" id="search" placeholder="Buscar fetch, JSON, GET, POST, CORS, async...">
+    <select class="filter" id="filter">
+      <option value="all">Todo el recorrido</option>
+      <option value="inicio">Inicio</option>
+      <option value="fetch">Fetch</option>
+      <option value="crud">CRUD</option>
+      <option value="web">Navegador</option>
+    </select>
+    <button class="btn" id="resetProgress">Reiniciar progreso</button>
+  </div>
+  <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+  <p class="eyebrow">RUTA DE APRENDIZAJE</p>
+  <nav id="nav"></nav>
+  <div class="map">
+    <b>Regla de la biblioteca</b><br>
+    Aprende una idea → mira el código → observa el resultado → haz el ejercicio → completa el mini proyecto.
+  </div>
+</aside>
+
+<main class="main">
+<section class="hero">
+  <span class="badge">⚡ APIS + JAVASCRIPT</span>
+  <h2>Aprende a traer datos reales a una página web.</h2>
+  <p>No necesitas dominar todo JavaScript antes de empezar. Aquí se explica únicamente lo que hace falta para consumir APIs: peticiones HTTP, JSON, <b>fetch</b>, promesas, <b>async/await</b>, errores, DOM y operaciones CRUD.</p>
+  <div class="pills"><span class="pill">HTTP</span><span class="pill">JSON</span><span class="pill">fetch()</span><span class="pill">then()</span><span class="pill">async/await</span><span class="pill">CRUD</span><span class="pill">CORS</span></div>
+  <div class="path">
+    <div><b>1 · Entender</b><span>API, endpoint, HTTP, JSON</span></div>
+    <div><b>2 · Consultar</b><span>GET, fetch, status, response.ok</span></div>
+    <div><b>3 · Mostrar</b><span>DOM, loaders, errores</span></div>
+    <div><b>4 · Modificar</b><span>POST, PUT, PATCH, DELETE</span></div>
+  </div>
+</section>
+
+<section class="lab">
+  <h2>🧪 Explorador de API</h2>
+  <p>Prueba una URL pública y observa exactamente qué devuelve. Empieza con JSONPlaceholder.</p>
+  <div class="api-form">
+    <select id="method"><option>GET</option><option>POST</option></select>
+    <input id="endpoint" value="https://jsonplaceholder.typicode.com/users/1" aria-label="Endpoint">
+    <button class="btn" id="sendRequest">Enviar petición</button>
+  </div>
+  <div class="console" id="apiConsole">Listo. Pulsa “Enviar petición”.</div>
+</section>
+
+<div id="content"></div>
+
+<section class="final" id="proyecto-final">
+  <h2>🏁 Proyecto final desde cero · Directorio de usuarios</h2>
+  <p>Con este proyecto juntas todo lo aprendido: petición GET, estado de carga, validación de respuesta, JSON, manejo de errores, DOM y búsqueda.</p>
+  <div class="final-grid">
+    <div>
+      <div class="project-steps">
+        <div><b>1.</b> Crea <code>index.html</code>, <code>style.css</code> y <code>app.js</code>.</div>
+        <div><b>2.</b> En HTML crea un botón, un buscador y un contenedor.</div>
+        <div><b>3.</b> En JavaScript consulta <code>/users</code> con <code>fetch</code>.</div>
+        <div><b>4.</b> Verifica <code>response.ok</code> y convierte con <code>response.json()</code>.</div>
+        <div><b>5.</b> Recorre el array y crea tarjetas con DOM.</div>
+        <div><b>6.</b> Filtra los usuarios mientras se escribe en el buscador.</div>
+        <div><b>7.</b> Si hay error, muestra un mensaje visible en la interfaz.</div>
+      </div>
+      <p class="tip">Meta: que el estudiante pueda explicar de dónde salen los datos, qué parte espera la red y qué ocurre si la API falla.</p>
+    </div>
+    <div class="app">
+      <h3 style="margin-top:0">Vista funcional del proyecto</h3>
+      <div class="app-controls">
+        <button id="loadUsers">Cargar usuarios</button>
+        <input id="userSearch" placeholder="Buscar por nombre..." disabled>
+      </div>
+      <div id="userStatus">Todavía no se han consultado datos.</div>
+      <div class="user-grid" id="userGrid"></div>
+    </div>
+  </div>
+</section>
+<footer class="footer">API JS Academy · Aprende haciendo peticiones pequeñas, visibles y fáciles de depurar.</footer>
+</main>
+</div>
+
 <script>
-const topics=[
-{title:'01 · Introducción',cat:'base',items:[{tag:'JavaScript',name:'¿Qué es JavaScript?',desc:'Lenguaje de programación que añade lógica, interacción y comportamiento a las páginas web. También se usa en servidores, automatización, escritorio y más.',code:'console.log("Hola JavaScript");',result:'Abre la consola del navegador para ver el mensaje.',note:'HTML estructura, CSS presenta y JavaScript aporta comportamiento.'},{tag:'<script>',name:'Cómo incluir JavaScript',desc:'Puede escribirse en una etiqueta script o enlazarse desde un archivo externo.',code:'<script src="app.js" defer></script>',result:'defer espera a que el HTML se analice antes de ejecutar el archivo.',note:'En proyectos reales, separa el código en archivos .js.'}]},
-{title:'02 · Variables y constantes',cat:'base',items:[{tag:'let / const',name:'Declaración de variables',desc:'let permite reasignación; const impide reasignar la referencia. var existe pero se evita en código moderno.',code:'const nombre = "Ana";\nlet puntos = 10;\npuntos += 5;\nconsole.log(nombre, puntos);',result:'Ana 15',note:'Usa const por defecto y let cuando necesites reasignar.'}]},
-{title:'03 · Tipos de datos',cat:'datos',items:[{tag:'string · number · boolean',name:'Primitivos',desc:'Los tipos primitivos principales son string, number, boolean, undefined, null, bigint y symbol.',code:'const texto = "Hola";\nconst edad = 25;\nconst activo = true;\nconsole.log(typeof texto, typeof edad, typeof activo);',result:'string number boolean',note:'typeof null devuelve "object" por una particularidad histórica.'},{tag:'template literals',name:'Plantillas de texto',desc:'Las comillas invertidas permiten interpolar variables y crear strings multilínea.',code:'const nombre="Dilan";\nconst mensaje=`Hola ${nombre}, bienvenido`;\nconsole.log(mensaje);',result:'Hola Dilan, bienvenido',note:'Usa ${...} dentro de backticks.'}]},
-{title:'04 · Operadores',cat:'base',items:[{tag:'===',name:'Comparación estricta',desc:'=== compara valor y tipo sin conversión implícita.',code:'console.log(5 === "5");\nconsole.log(5 == "5");',result:'false\ntrue',note:'Prefiere === y !== para evitar conversiones inesperadas.'},{tag:'&& || ??',name:'Operadores lógicos',desc:'&& exige que ambas condiciones sean verdaderas; || acepta alguna; ?? usa el segundo valor solo si el primero es null o undefined.',code:'const usuario=null;\nconsole.log(usuario ?? "Invitado");',result:'Invitado',note:'?? es distinto de || cuando 0, false o "" son valores válidos.'}]},
-{title:'05 · Condicionales',cat:'base',items:[{tag:'if / else',name:'Decisiones',desc:'Permiten ejecutar bloques distintos según una condición.',code:'const edad=20;\nif(edad>=18){\n console.log("Mayor de edad");\n}else{\n console.log("Menor de edad");\n}',result:'Mayor de edad',note:'Las condiciones se evalúan como verdaderas o falsas.'},{tag:'switch',name:'Múltiples casos',desc:'switch es útil cuando comparas un mismo valor contra varios casos.',code:'const rol="admin";\nswitch(rol){\n case "admin": console.log("Acceso total"); break;\n default: console.log("Acceso básico");\n}',result:'Acceso total',note:'No olvides break cuando no quieras continuar al siguiente caso.'}]},
-{title:'06 · Bucles',cat:'base',items:[{tag:'for',name:'Repetición controlada',desc:'for repite un bloque mientras se cumpla una condición.',code:'for(let i=1;i<=3;i++){\n console.log(i);\n}',result:'1\n2\n3',note:'También existen while y do...while.'},{tag:'for...of',name:'Recorrer colecciones',desc:'for...of recorre valores de arrays y otros iterables.',code:'for(const lenguaje of ["HTML","CSS","JS"]){\n console.log(lenguaje);\n}',result:'HTML\nCSS\nJS',note:'for...in recorre claves y suele usarse con objetos.'}]},
-{title:'07 · Funciones',cat:'base',items:[{tag:'function',name:'Funciones declaradas',desc:'Agrupan lógica reutilizable y pueden recibir parámetros y devolver valores.',code:'function sumar(a,b){\n return a+b;\n}\nconsole.log(sumar(4,6));',result:'10',note:'return termina la función y devuelve un valor.'},{tag:'=>',name:'Arrow functions',desc:'Sintaxis compacta muy usada en callbacks y programación funcional.',code:'const cuadrado = n => n*n;\nconsole.log(cuadrado(5));',result:'25',note:'Las arrow functions no crean su propio this.'}]},
-{title:'08 · Arrays',cat:'datos',items:[{tag:'[]',name:'Colecciones ordenadas',desc:'Los arrays almacenan múltiples valores y ofrecen métodos para transformar y filtrar datos.',code:'const nums=[1,2,3,4];\nconst dobles=nums.map(n=>n*2);\nconsole.log(dobles);',result:'[2, 4, 6, 8]',note:'map devuelve un nuevo array.'},{tag:'filter / find',name:'Buscar y filtrar',desc:'filter obtiene varios elementos que cumplen una condición; find devuelve el primero.',code:'const nums=[3,8,12,5];\nconsole.log(nums.filter(n=>n>6));\nconsole.log(nums.find(n=>n>10));',result:'[8, 12]\n12',note:'reduce permite acumular un array en un solo valor.'}]},
-{title:'09 · Objetos',cat:'datos',items:[{tag:'{}',name:'Pares clave-valor',desc:'Los objetos agrupan propiedades relacionadas.',code:'const persona={nombre:"Ana",edad:24};\nconsole.log(persona.nombre);\npersona.ciudad="Bogotá";',result:'Ana',note:'Puedes acceder con punto o corchetes.'},{tag:'destructuring',name:'Desestructuración',desc:'Extrae propiedades o posiciones en variables independientes.',code:'const usuario={nombre:"Luis",rol:"admin"};\nconst {nombre,rol}=usuario;\nconsole.log(nombre,rol);',result:'Luis admin',note:'También funciona con arrays.'}]},
-{title:'10 · Scope y closures',cat:'avanzado',items:[{tag:'scope',name:'Alcance',desc:'El alcance determina dónde existe una variable. let y const tienen alcance de bloque.',code:'if(true){\n const secreto=42;\n console.log(secreto);\n}\n// secreto no existe aquí',result:'42 dentro del bloque',note:'Comprender scope evita variables globales accidentales.'},{tag:'closure',name:'Closures',desc:'Una función interna puede recordar variables del contexto donde fue creada.',code:'function contador(){\n let n=0;\n return ()=>++n;\n}\nconst c=contador();\nconsole.log(c(),c());',result:'1 2',note:'Closures permiten encapsular estado.'}]},
-{title:'11 · DOM',cat:'dom',items:[{tag:'querySelector',name:'Seleccionar elementos',desc:'El DOM representa el HTML como objetos que JavaScript puede consultar y modificar.',code:'const titulo=document.querySelector("h1");\ntitulo.textContent="Nuevo título";',result:'El contenido del primer h1 cambia.',note:'querySelector usa selectores CSS.'},{tag:'createElement',name:'Crear contenido',desc:'Puedes crear nodos y agregarlos al documento.',code:'const li=document.createElement("li");\nli.textContent="Nuevo elemento";\ndocument.querySelector("ul").append(li);',result:'Se agrega un nuevo li al ul.',note:'Evita innerHTML con datos no confiables.'}]},
-{title:'12 · Eventos',cat:'dom',items:[{tag:'addEventListener',name:'Escuchar interacciones',desc:'Los eventos permiten responder a clics, escritura, envío de formularios, teclado y más.',code:'button.addEventListener("click",()=>{\n console.log("clic");\n});',result:'Cada clic ejecuta el callback.',note:'addEventListener permite múltiples escuchadores.'},{tag:'event',name:'Objeto del evento',desc:'El callback recibe información sobre lo ocurrido y el elemento relacionado.',code:'input.addEventListener("input",e=>{\n console.log(e.target.value);\n});',result:'Muestra el valor conforme se escribe.',note:'preventDefault evita el comportamiento por defecto cuando es necesario.'}]},
-{title:'13 · Formularios',cat:'dom',items:[{tag:'FormData',name:'Leer formularios',desc:'FormData facilita extraer valores de un formulario.',code:'form.addEventListener("submit",e=>{\n e.preventDefault();\n const data=new FormData(form);\n console.log(data.get("nombre"));\n});',result:'Obtiene el campo llamado nombre sin recargar la página.',note:'Valida tanto en cliente como en servidor.'}]},
-{title:'14 · JSON',cat:'datos',items:[{tag:'JSON',name:'Serialización',desc:'JSON es un formato textual muy usado para APIs y almacenamiento.',code:'const obj={id:1,nombre:"Curso"};\nconst texto=JSON.stringify(obj);\nconst copia=JSON.parse(texto);',result:'El objeto se convierte a texto y luego vuelve a objeto.',note:'JSON no soporta funciones ni undefined.'}]},
-{title:'15 · Promesas',cat:'async',items:[{tag:'Promise',name:'Trabajo asincrónico',desc:'Una promesa representa un resultado futuro: pendiente, cumplido o rechazado.',code:'Promise.resolve("ok")\n .then(valor=>console.log(valor))\n .catch(error=>console.error(error));',result:'ok',note:'async/await ofrece una sintaxis más lineal sobre promesas.'}]},
-{title:'16 · Async / Await',cat:'async',items:[{tag:'async await',name:'Esperar promesas',desc:'await pausa la función async hasta que una promesa se resuelva.',code:'async function cargar(){\n const respuesta=await fetch("https://jsonplaceholder.typicode.com/todos/1");\n const data=await respuesta.json();\n console.log(data.title);\n}',result:'Obtiene datos remotos cuando se ejecuta con conexión.',note:'Usa try/catch para manejar fallos.'}]},
-{title:'17 · Fetch y APIs',cat:'async',items:[{tag:'fetch()',name:'Peticiones HTTP',desc:'fetch permite consumir APIs desde el navegador.',code:'fetch("https://jsonplaceholder.typicode.com/users/1")\n .then(r=>r.json())\n .then(user=>console.log(user.name));',result:'Muestra el nombre devuelto por la API.',note:'fetch solo rechaza por fallos de red; revisa response.ok para errores HTTP.'}]},
-{title:'18 · Manejo de errores',cat:'async',items:[{tag:'try / catch',name:'Controlar excepciones',desc:'Captura errores para responder de forma controlada.',code:'try{\n JSON.parse("texto inválido");\n}catch(error){\n console.error("No se pudo procesar");\n}',result:'No se pudo procesar',note:'finally se ejecuta haya o no error.'}]},
-{title:'19 · localStorage',cat:'dom',items:[{tag:'localStorage',name:'Persistencia local',desc:'Guarda pares clave-valor en el navegador entre recargas.',code:'localStorage.setItem("tema","oscuro");\nconst tema=localStorage.getItem("tema");',result:'El valor permanece en el navegador.',note:'Solo almacena strings; usa JSON para objetos.'}]},
-{title:'20 · Clases',cat:'avanzado',items:[{tag:'class',name:'Programación orientada a objetos',desc:'Las clases ofrecen una sintaxis para crear objetos con estado y métodos.',code:'class Persona{\n constructor(nombre){this.nombre=nombre}\n saludar(){return `Hola ${this.nombre}`}\n}\nconst p=new Persona("Ana");',result:'p.saludar() → Hola Ana',note:'JavaScript sigue usando prototipos internamente.'}]},
-{title:'21 · Módulos',cat:'avanzado',items:[{tag:'import / export',name:'Separar código',desc:'Los módulos permiten repartir el programa en archivos con dependencias explícitas.',code:'// math.js\nexport const sumar=(a,b)=>a+b;\n\n// app.js\nimport {sumar} from "./math.js";',result:'Cada archivo expone solo lo necesario.',note:'En HTML usa <script type="module">.'}]},
-{title:'22 · Buenas prácticas',cat:'avanzado',items:[{tag:'clean JS',name:'Código mantenible',desc:'Usa nombres claros, funciones pequeñas, const por defecto, evita globals, maneja errores y separa responsabilidades.',code:'const calcularTotal = items =>\n items.reduce((total,item)=>total+item.precio,0);',result:'Una función pequeña y predecible es fácil de probar.',note:'Evita funciones gigantes y efectos secundarios innecesarios.'}]}
+const lessons = [
+{
+ id:"que-es-api",num:"01",cat:"inicio",title:"¿Qué es una API?",subtitle:"Cliente, servidor, recurso y endpoint.",
+ why:"Una API permite que dos aplicaciones se comuniquen. Desde el navegador, JavaScript actúa como cliente y solicita datos a un servidor.",
+ key:"Piensa en una API como una ventanilla: haces una solicitud concreta y recibes una respuesta concreta.",
+ code:"// Una URL de API puede devolver datos\nhttps://jsonplaceholder.typicode.com/users/1",
+ result:"<h4>Idea visual</h4><p>🌐 Navegador → <b>GET /users/1</b> → 🖥 Servidor</p><p>🖥 Servidor → <b>JSON del usuario</b> → 🌐 Navegador</p>",
+ tip:"Un endpoint es una URL diseñada para acceder a un recurso específico.",
+ task:"Abre el endpoint en una pestaña del navegador. Identifica al menos 3 propiedades del usuario que devuelve.",
+ mini:"Mini proyecto: dibuja el flujo Navegador → API → Respuesta y escribe debajo qué dato quieres mostrar en una tarjeta."
+},
+{
+ id:"http",num:"02",cat:"inicio",title:"HTTP sin complicarlo",subtitle:"Métodos, rutas y códigos de estado.",
+ why:"Las APIs web suelen comunicarse mediante HTTP. El método indica la intención de la petición y el status describe el resultado.",
+ key:"GET consulta · POST crea · PUT/PATCH actualizan · DELETE elimina.",
+ code:"GET    /users/1\nPOST   /users\nPATCH  /users/1\nDELETE /users/1",
+ result:"<div class='table-wrap'><table class='http-table'><tr><th>Status</th><th>Significa</th></tr><tr><td>200</td><td>Solicitud correcta</td></tr><tr><td>201</td><td>Recurso creado</td></tr><tr><td>204</td><td>Correcto, sin contenido</td></tr><tr><td>400</td><td>Petición inválida</td></tr><tr><td>401</td><td>Falta autenticación</td></tr><tr><td>403</td><td>Sin permiso</td></tr><tr><td>404</td><td>No encontrado</td></tr><tr><td>429</td><td>Demasiadas peticiones</td></tr><tr><td>500</td><td>Error del servidor</td></tr></table></div>",
+ tip:"No memorices todos los códigos. Aprende primero las familias 2xx, 4xx y 5xx.",
+ task:"Explica con tus palabras la diferencia entre 200, 404 y 500.",
+ mini:"Mini proyecto: crea una pequeña tabla HTML con los 5 status que te parezcan más útiles."
+},
+{
+ id:"json",num:"03",cat:"inicio",title:"JSON: el formato que vas a recibir",subtitle:"Objetos y arrays que llegan como texto.",
+ why:"Muchas APIs devuelven JSON. JavaScript puede convertir esa respuesta en objetos y arrays que luego puedes recorrer y mostrar.",
+ key:"Objeto: { } · Array: [ ] · Propiedad: clave + valor.",
+ code:'const texto = \'{"id":1,"name":"Ana"}\';\nconst usuario = JSON.parse(texto);\nconsole.log(usuario.name);',
+ result:"<span class='status'>Resultado</span><div class='json'>{\n  "id": 1,\n  "name": "Ana"\n}</div><p><b>usuario.name</b> → Ana</p>",
+ tip:"response.json() hace el trabajo de convertir el cuerpo JSON de una respuesta HTTP.",
+ task:"Observa un usuario de JSONPlaceholder y distingue cuáles propiedades son strings, números y objetos.",
+ mini:"Mini proyecto: crea manualmente un objeto usuario con nombre, correo y ciudad; después muéstralo en una tarjeta HTML."
+},
+{
+ id:"fetch-get",num:"04",cat:"fetch",title:"Tu primer fetch GET",subtitle:"Pedir datos con JavaScript.",
+ why:"fetch() inicia una petición y devuelve una Promise. Con .then() puedes esperar la respuesta paso a paso.",
+ key:"fetch(URL) → Response → response.json() → datos.",
+ code:'fetch("https://jsonplaceholder.typicode.com/users/1")\n  .then(function(response) {\n    return response.json();\n  })\n  .then(function(user) {\n    console.log(user.name);\n  });',
+ result:"<h4>Flujo</h4><p>1. fetch inicia la petición</p><p>2. llega Response</p><p>3. json() convierte el cuerpo</p><p>4. el segundo then recibe el usuario</p>",
+ tip:"El primer .then() todavía no recibe el usuario listo; recibe el objeto Response.",
+ task:"Cambia /users/1 por /users/2 y predice qué parte del resultado debería cambiar.",
+ mini:"Mini proyecto: consulta un usuario y escribe en el HTML su nombre y correo."
+},
+{
+ id:"status-ok",num:"05",cat:"fetch",title:"response.status y response.ok",subtitle:"No asumir que todo salió bien.",
+ why:"fetch no lanza un error automáticamente por un 404 o un 500. Debes revisar la respuesta HTTP.",
+ key:"response.ok es true cuando el status está dentro del rango 200–299.",
+ code:'fetch("https://jsonplaceholder.typicode.com/users/1")\n  .then(function(response) {\n    console.log(response.status);\n    console.log(response.ok);\n\n    if (!response.ok) {\n      throw new Error("HTTP " + response.status);\n    }\n\n    return response.json();\n  });',
+ result:"<p><b>response.status</b> → 200</p><p><b>response.ok</b> → true</p><p>Si el servidor responde 404: <b>response.ok → false</b>.</p>",
+ tip:"Esta comprobación debe aparecer antes de response.json() cuando quieres controlar errores HTTP.",
+ task:"Usa una ruta que no exista y observa el status. Luego explica por qué response.ok vale false.",
+ mini:"Mini proyecto: muestra en pantalla “Datos cargados” o “No se pudo consultar” según response.ok."
+},
+{
+ id:"async-await",num:"06",cat:"fetch",title:"La misma petición con async/await",subtitle:"Una forma más lineal de leer código asincrónico.",
+ why:"async/await trabaja sobre Promises, pero permite leer la petición casi de arriba hacia abajo.",
+ key:"await solo puede usarse dentro de una función async o en contextos que soporten top-level await.",
+ code:'async function cargarUsuario() {\n  const response = await fetch(\n    "https://jsonplaceholder.typicode.com/users/1"\n  );\n\n  if (!response.ok) {\n    throw new Error("HTTP " + response.status);\n  }\n\n  const user = await response.json();\n  return user;\n}',
+ result:"<h4>Dos esperas diferentes</h4><p><b>await fetch(...)</b> espera la respuesta HTTP.</p><p><b>await response.json()</b> espera leer y convertir el cuerpo.</p>",
+ tip:"Una función async siempre devuelve una Promise, incluso si haces return user.",
+ task:"Explica por qué const user = cargarUsuario() no entrega directamente el objeto usuario.",
+ mini:"Mini proyecto: llama cargarUsuario() desde otra función async y escribe user.name en el DOM."
+},
+{
+ id:"errores",num:"07",cat:"fetch",title:"try/catch + estado de carga",subtitle:"Una interfaz debe explicar qué está pasando.",
+ why:"Una petición puede tardar o fallar. El usuario necesita ver estados de carga, éxito y error.",
+ key:"try ejecuta el flujo normal · catch recibe el error · finally sirve para limpiar el estado.",
+ code:'async function cargar() {\n  estado.textContent = "Cargando...";\n\n  try {\n    const response = await fetch(URL);\n    if (!response.ok) throw new Error("HTTP " + response.status);\n\n    const datos = await response.json();\n    estado.textContent = "Listo";\n    return datos;\n  } catch (error) {\n    estado.textContent = "No se pudo cargar";\n    console.error(error);\n  }\n}',
+ result:"<p>⏳ Cargando...</p><p>✅ Listo</p><p>o</p><p>❌ No se pudo cargar</p>",
+ tip:"No dejes un error solo en console.error; muestra también un mensaje entendible en la interfaz.",
+ task:"Añade finally para habilitar de nuevo un botón después de terminar la petición.",
+ mini:"Mini proyecto: crea un botón “Cargar usuario” que se deshabilite mientras fetch está trabajando."
+},
+{
+ id:"dom",num:"08",cat:"web",title:"Mostrar los datos en HTML",subtitle:"De JSON a una interfaz visible.",
+ why:"Consumir una API no termina en console.log. El objetivo habitual es convertir los datos en contenido de la página.",
+ key:"Guarda la respuesta en una variable y después crea o actualiza elementos del DOM.",
+ code:'function mostrarUsuario(user) {\n  const tarjeta = document.createElement("article");\n  const nombre = document.createElement("h3");\n  const correo = document.createElement("p");\n\n  nombre.textContent = user.name;\n  correo.textContent = user.email;\n\n  tarjeta.append(nombre, correo);\n  contenedor.append(tarjeta);\n}',
+ result:"<div style='border:1px solid #ccd9e1;border-radius:12px;padding:13px'><b>Leanne Graham</b><br><span style='color:#647887'>Sincere@april.biz</span></div>",
+ tip:"textContent es una opción segura para insertar texto recibido desde una API.",
+ task:"Agrega ciudad y teléfono a la tarjeta usando user.address.city y user.phone.",
+ mini:"Mini proyecto: consulta /users y crea una tarjeta por cada usuario usando un for o for...of."
+},
+{
+ id:"query",num:"09",cat:"fetch",title:"Parámetros de consulta",subtitle:"Filtrar o pedir una parte específica.",
+ why:"Muchas APIs usan query parameters para buscar, ordenar, paginar o filtrar resultados.",
+ key:"Los parámetros aparecen después de ? y se separan con &.",
+ code:'const params = new URLSearchParams({\n  userId: 1\n});\n\nconst url = "https://jsonplaceholder.typicode.com/posts?" + params;\nconst response = await fetch(url);\nconst posts = await response.json();',
+ result:"<p><b>URL final:</b></p><div class='json'>.../posts?userId=1</div><p>La respuesta contiene únicamente posts del usuario 1.</p>",
+ tip:"URLSearchParams evita concatenar manualmente muchos parámetros.",
+ task:"Prueba /comments?postId=1 e identifica cuántos comentarios devuelve.",
+ mini:"Mini proyecto: crea un select con userId 1–5 y consulta los posts del usuario seleccionado."
+},
+{
+ id:"post",num:"10",cat:"crud",title:"POST: enviar JSON",subtitle:"Crear un recurso.",
+ why:"Para enviar datos normalmente usarás method POST, un header Content-Type y un body convertido con JSON.stringify().",
+ key:"headers describe el contenido · body contiene los datos enviados.",
+ code:'const nuevoPost = {\n  title: "Mi primer post",\n  body: "Aprendiendo APIs",\n  userId: 1\n};\n\nconst response = await fetch(\n  "https://jsonplaceholder.typicode.com/posts",\n  {\n    method: "POST",\n    headers: { "Content-Type": "application/json" },\n    body: JSON.stringify(nuevoPost)\n  }\n);\n\nconst creado = await response.json();',
+ result:"<span class='status'>201 Created</span><div class='json'>{\n  "title": "Mi primer post",\n  "body": "Aprendiendo APIs",\n  "userId": 1,\n  "id": 101\n}</div>",
+ tip:"JSONPlaceholder simula la creación: responde como si guardara, pero no persiste cambios reales.",
+ task:"Cambia title, body y userId por datos propios; inspecciona el objeto que responde la API.",
+ mini:"Mini proyecto: crea un formulario de título y contenido; al enviarlo, haz POST y muestra la respuesta."
+},
+{
+ id:"put-patch",num:"11",cat:"crud",title:"PUT vs PATCH",subtitle:"Actualizar todo o solo una parte.",
+ why:"PATCH suele enviar únicamente los campos que cambian. PUT suele representar el recurso completo.",
+ key:"PATCH = cambio parcial · PUT = reemplazo completo según el diseño de la API.",
+ code:'const response = await fetch(\n  "https://jsonplaceholder.typicode.com/posts/1",\n  {\n    method: "PATCH",\n    headers: { "Content-Type": "application/json" },\n    body: JSON.stringify({ title: "Título actualizado" })\n  }\n);\n\nconst actualizado = await response.json();',
+ result:"<p>El recurso conserva sus demás campos y cambia el título solicitado.</p><div class='json'>{\n  "userId": 1,\n  "id": 1,\n  "title": "Título actualizado",\n  ...\n}</div>",
+ tip:"La semántica exacta de PUT/PATCH depende de la documentación de cada API.",
+ task:"Haz un PATCH cambiando únicamente body y observa qué devuelve.",
+ mini:"Mini proyecto: agrega un botón “Editar título” a un post y envía un PATCH."
+},
+{
+ id:"delete",num:"12",cat:"crud",title:"DELETE",subtitle:"Solicitar la eliminación de un recurso.",
+ why:"DELETE indica que quieres eliminar un recurso identificado por una ruta concreta.",
+ key:"Una respuesta correcta puede traer JSON vacío o incluso no incluir cuerpo.",
+ code:'const response = await fetch(\n  "https://jsonplaceholder.typicode.com/posts/1",\n  { method: "DELETE" }\n);\n\nif (!response.ok) {\n  throw new Error("HTTP " + response.status);\n}\n\nconsole.log("Eliminación solicitada");',
+ result:"<span class='status'>200 OK</span><p>JSONPlaceholder confirma la operación con una respuesta vacía.</p>",
+ tip:"No llames response.json() a ciegas cuando una API responde 204 No Content.",
+ task:"Investiga qué diferencia habría si el servidor respondiera 204 en vez de 200.",
+ mini:"Mini proyecto: elimina visualmente una tarjeta solo cuando la petición DELETE termine correctamente."
+},
+{
+ id:"headers-auth",num:"13",cat:"web",title:"Headers y autenticación",subtitle:"Información adicional que viaja con la petición.",
+ why:"Algunas APIs requieren tokens. Estos suelen enviarse en un header Authorization.",
+ key:"Nunca publiques claves secretas reales dentro del JavaScript del navegador.",
+ code:'const response = await fetch(url, {\n  headers: {\n    "Accept": "application/json",\n    "Authorization": "Bearer TOKEN_DE_EJEMPLO"\n  }\n});',
+ result:"<p><b>Request headers</b></p><div class='json'>Accept: application/json\nAuthorization: Bearer ...</div><p>El servidor decide si el token permite acceder.</p>",
+ tip:"Si una clave debe permanecer secreta, normalmente la petición sensible debe pasar por un backend.",
+ task:"Abre DevTools → Network, entra a una petición y localiza Request Headers y Response Headers.",
+ mini:"Mini proyecto: crea un diagrama Frontend → Backend → API externa para mostrar dónde debería vivir una clave secreta."
+},
+{
+ id:"cors",num:"14",cat:"web",title:"CORS",subtitle:"Cuando el navegador bloquea una petición entre orígenes.",
+ why:"CORS es una política aplicada por el navegador. El servidor debe autorizar qué orígenes pueden leer su respuesta.",
+ key:"No es un error que se solucione desactivando seguridad del navegador en un proyecto real.",
+ code:'// Ejemplo conceptual:\n// Tu web: https://mi-sitio.com\n// API:    https://api-externa.com\n//\n// El servidor de la API debe responder con\n// los headers CORS apropiados.',
+ result:"<p>✅ API permite tu origen → JavaScript puede leer la respuesta.</p><p>⛔ API no lo permite → el navegador bloquea el acceso.</p>",
+ tip:"Si controlas el backend, configura CORS allí. Si no lo controlas, consulta la documentación de la API.",
+ task:"Explica por qué Postman puede funcionar con una API mientras el navegador muestra un error CORS.",
+ mini:"Mini proyecto: escribe un checklist de diagnóstico: URL, status, consola, Network, headers CORS."
+},
+{
+ id:"paralelo",num:"15",cat:"fetch",title:"Varias peticiones con Promise.all",subtitle:"Esperar recursos independientes al mismo tiempo.",
+ why:"Si dos peticiones no dependen una de otra, Promise.all puede esperarlas en paralelo.",
+ key:"Promise.all devuelve un array con los resultados en el mismo orden de las Promises.",
+ code:'const [usersResponse, postsResponse] = await Promise.all([\n  fetch("https://jsonplaceholder.typicode.com/users"),\n  fetch("https://jsonplaceholder.typicode.com/posts")\n]);\n\nconst [users, posts] = await Promise.all([\n  usersResponse.json(),\n  postsResponse.json()\n]);',
+ result:"<p>👥 users y 📝 posts comienzan a consultarse sin esperar uno por uno.</p><p>Al final tienes ambos conjuntos de datos disponibles.</p>",
+ tip:"Úsalo cuando las peticiones sean independientes. Si B necesita un ID obtenido en A, hazlas en secuencia.",
+ task:"Explica un caso donde Promise.all sí conviene y otro donde no.",
+ mini:"Mini proyecto: carga usuarios y posts; muestra cuántos usuarios y cuántos posts llegaron."
+},
+{
+ id:"cancelar",num:"16",cat:"web",title:"Cancelar una petición",subtitle:"AbortController para búsquedas o pantallas que cambian.",
+ why:"A veces una petición deja de ser necesaria. AbortController permite cancelarla.",
+ key:"signal conecta fetch con el controlador; abort() cancela la operación.",
+ code:'const controller = new AbortController();\n\nfetch(url, { signal: controller.signal })\n  .catch(function(error) {\n    if (error.name === "AbortError") {\n      console.log("Petición cancelada");\n    }\n  });\n\ncontroller.abort();',
+ result:"<p>La petición pendiente se interrumpe y puede controlarse como AbortError.</p>",
+ tip:"Es útil en buscadores donde el usuario escribe rápidamente y la consulta anterior ya no interesa.",
+ task:"Describe qué problema puede ocurrir si llegan respuestas antiguas después de una búsqueda más reciente.",
+ mini:"Mini proyecto: diseña un buscador que cancele la petición anterior antes de iniciar una nueva."
+},
+{
+ id:"debug",num:"17",cat:"web",title:"Depurar APIs en DevTools",subtitle:"Console y Network son tus aliados.",
+ why:"Cuando algo falla, mirar solo el código no basta. Network muestra qué petición salió, qué status llegó y qué respondió el servidor.",
+ key:"Revisa: URL → método → status → request headers → response → console.",
+ code:'console.log("URL:", url);\nconsole.log("Status:", response.status);\nconsole.log("OK:", response.ok);\nconsole.log("Datos:", datos);',
+ result:"<h4>Checklist rápido</h4><p>1. ¿La URL es correcta?</p><p>2. ¿La petición aparece en Network?</p><p>3. ¿Cuál es el status?</p><p>4. ¿Qué trae Response?</p><p>5. ¿Hay error CORS o JavaScript?</p>",
+ tip:"Diagnostica primero el tipo de fallo; después corrige.",
+ task:"Provoca un 404 a propósito y encuentra la petición en Network.",
+ mini:"Mini proyecto: crea una ficha de diagnóstico con URL, método, status y mensaje de error."
+},
+{
+ id:"estructura",num:"18",cat:"web",title:"Estructura mínima del proyecto",subtitle:"Separar interfaz, estilos y lógica de API.",
+ why:"Para un proyecto pequeño bastan tres archivos. El HTML define la vista, CSS presenta y app.js realiza peticiones y actualiza el DOM.",
+ key:"No necesitas un framework para aprender APIs.",
+ code:"mi-proyecto-api/\n├── index.html\n├── style.css\n└── app.js",
+ result:"<p><b>index.html</b> → botones, inputs y contenedores</p><p><b>style.css</b> → diseño</p><p><b>app.js</b> → fetch, errores y DOM</p>",
+ tip:"En HTML enlaza style.css y usa <script src='app.js' defer></script>.",
+ task:"Crea esa estructura vacía y comprueba que app.js se ejecute con un console.log.",
+ mini:"Mini proyecto: prepara la carpeta del proyecto final y deja listo un botón “Cargar usuarios”."
+}
 ];
-const nav=document.querySelector('#nav'),content=document.querySelector('#content');function render(){const q=search.value.toLowerCase(),f=filter.value;content.innerHTML='';nav.innerHTML='';topics.forEach((t,ti)=>{const matched=t.items.filter(i=>(f==='all'||t.cat===f)&&(`${t.title} ${i.tag} ${i.name} ${i.desc}`).toLowerCase().includes(q));if(!matched.length)return;const nb=document.createElement('button');nb.textContent=t.title;nb.onclick=()=>document.querySelector('#s'+ti)?.scrollIntoView({behavior:'smooth'});nav.appendChild(nb);const sec=document.createElement('section');sec.id='s'+ti;sec.innerHTML=`<h2 class="section-title">${t.title}</h2><div class="cards"></div><div class="activity"><b>Actividad:</b> reescribe uno de los ejemplos, cambia sus datos de entrada y predice el resultado antes de ejecutarlo.</div>`;const cards=sec.querySelector('.cards');matched.forEach(i=>{const card=document.createElement('article');card.className='card';card.innerHTML=`<div class="explain"><div class="tag">${i.tag}</div><h3>${i.name}</h3><p>${i.desc}</p><div class="chips"><span class="chip">JavaScript</span><span class="chip">Ejemplo</span><span class="chip">Práctica</span></div><div class="note">ⓘ ${i.note}</div></div><div class="code"><div class="head"><span>Código JavaScript</span><button class="copy">Copiar</button></div><pre></pre></div><div class="preview"><div class="head"><span>Resultado / comportamiento</span></div><div class="frame"></div></div>`;card.querySelector('pre').textContent=i.code;card.querySelector('.frame').textContent=i.result;card.querySelector('.copy').onclick=()=>navigator.clipboard.writeText(i.code);cards.appendChild(card)});content.appendChild(sec)});}search.oninput=render;filter.onchange=render;render();const h=htmlEditor,c=cssEditor,j=jsEditor,l=live;function update(){l.srcdoc=`<!doctype html><html><head><style>${c.value}</style></head><body>${h.value}<script>${j.value.replace(/<\/script>/gi,'<\\/script>')}<\/script></body></html>`}h.oninput=c.oninput=j.oninput=update;update();
+
+const content = document.getElementById("content");
+const nav = document.getElementById("nav");
+const search = document.getElementById("search");
+const filter = document.getElementById("filter");
+const progress = document.getElementById("progress");
+let done = JSON.parse(localStorage.getItem("api-js-progress") || "{}");
+
+function escapeCode(text){
+  return text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+function render(){
+  const q = search.value.toLowerCase().trim();
+  const f = filter.value;
+  content.innerHTML = "";
+  nav.innerHTML = "";
+  lessons.forEach(function(l){
+    const hay = (l.title+" "+l.subtitle+" "+l.why+" "+l.code+" "+l.tip).toLowerCase().includes(q);
+    const categoria = f === "all" || l.cat === f;
+    if(!hay || !categoria) return;
+
+    const n = document.createElement("button");
+    n.className = "navbtn";
+    n.innerHTML = l.num+" · "+l.title+"<small>"+l.subtitle+"</small>";
+    n.onclick = function(){ document.getElementById(l.id).scrollIntoView({behavior:"smooth"}); };
+    nav.appendChild(n);
+
+    const s = document.createElement("section");
+    s.className = "section";
+    s.id = l.id;
+    s.innerHTML =
+      "<div class='section-head'><div class='num'>"+l.num+"</div><div><h2>"+l.title+"</h2><p>"+l.subtitle+"</p></div></div>"+
+      "<article class='lesson'><div class='lesson-grid'>"+
+      "<div class='panel explain'><div class='kicker'>QUÉ NECESITAS ENTENDER</div><h3>"+l.title+"</h3><p>"+l.why+"</p><div class='key'><b>Clave:</b> "+l.key+"</div><div class='tip'>💡 "+l.tip+"</div></div>"+
+      "<div class='panel code'><div class='panel-head'><span>CÓDIGO / EJEMPLO</span><button class='copy'>Copiar</button></div><pre>"+escapeCode(l.code)+"</pre></div>"+
+      "<div class='panel preview'><div class='panel-head'><span>ASÍ SE VE / QUÉ OCURRE</span></div><div class='output'>"+l.result+"</div></div>"+
+      "</div></article>"+
+      "<div class='activity'><div class='task'><h4>✍ Ejercicio corto</h4><p>"+l.task+"</p></div><div class='mini'><h4>🧩 Mini proyecto</h4><p>"+l.mini+"</p><label class='check'><input type='checkbox' data-id='"+l.id+"' "+(done[l.id]?"checked":"")+"> Marcar esta lección como completada</label></div></div>";
+    s.querySelector(".copy").onclick = function(){
+      navigator.clipboard.writeText(l.code);
+      this.textContent = "Copiado ✓";
+      const b = this;
+      setTimeout(function(){ b.textContent = "Copiar"; },1200);
+    };
+    content.appendChild(s);
+  });
+  bindChecks();
+  updateProgress();
+}
+function bindChecks(){
+  document.querySelectorAll("[data-id]").forEach(function(c){
+    c.onchange = function(){
+      done[c.dataset.id] = c.checked;
+      localStorage.setItem("api-js-progress", JSON.stringify(done));
+      updateProgress();
+    };
+  });
+}
+function updateProgress(){
+  const count = lessons.filter(function(l){ return done[l.id]; }).length;
+  progress.style.width = Math.round(count/lessons.length*100)+"%";
+}
+search.oninput = render;
+filter.onchange = render;
+document.getElementById("resetProgress").onclick = function(){
+  done={}; localStorage.removeItem("api-js-progress"); render();
+};
+document.getElementById("themeBtn").onclick = function(){
+  document.body.classList.toggle("light");
+};
+
+document.getElementById("sendRequest").onclick = async function(){
+  const box = document.getElementById("apiConsole");
+  const endpoint = document.getElementById("endpoint").value.trim();
+  const method = document.getElementById("method").value;
+  box.textContent = "Enviando "+method+" "+endpoint+" ...";
+  try{
+    const options = {method:method};
+    if(method === "POST"){
+      options.headers = {"Content-Type":"application/json"};
+      options.body = JSON.stringify({title:"Prueba desde API JS Academy",body:"Hola API",userId:1});
+    }
+    const response = await fetch(endpoint, options);
+    const text = await response.text();
+    let pretty = text;
+    try{ pretty = JSON.stringify(JSON.parse(text), null, 2); }catch(e){}
+    box.textContent = "HTTP "+response.status+" · ok="+response.ok+"\n\n"+pretty;
+  }catch(error){
+    box.textContent = "Error: "+error.message+"\n\nRevisa la URL, la consola y posibles restricciones CORS.";
+  }
+};
+
+let usersCache=[];
+function drawUsers(list){
+  const grid=document.getElementById("userGrid");
+  grid.innerHTML="";
+  list.forEach(function(user){
+    const card=document.createElement("article");
+    card.className="user-card";
+    const name=document.createElement("b");
+    const email=document.createElement("small");
+    name.textContent=user.name;
+    email.textContent=user.email+" · "+user.address.city;
+    card.append(name,email);
+    grid.appendChild(card);
+  });
+}
+document.getElementById("loadUsers").onclick=async function(){
+  const status=document.getElementById("userStatus");
+  const searchInput=document.getElementById("userSearch");
+  status.textContent="Cargando usuarios...";
+  try{
+    const response=await fetch("https://jsonplaceholder.typicode.com/users");
+    if(!response.ok) throw new Error("HTTP "+response.status);
+    usersCache=await response.json();
+    status.textContent="Listo: "+usersCache.length+" usuarios.";
+    searchInput.disabled=false;
+    drawUsers(usersCache);
+  }catch(error){
+    status.textContent="No se pudieron cargar los usuarios: "+error.message;
+  }
+};
+document.getElementById("userSearch").oninput=function(){
+  const q=this.value.toLowerCase();
+  drawUsers(usersCache.filter(function(u){return u.name.toLowerCase().includes(q);}));
+};
+
+render();
 </script>
-</body></html>
+</body>
+</html>
